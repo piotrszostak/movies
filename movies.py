@@ -8,6 +8,9 @@ class Movie:
     def __str__(self):
         return f"{self.title} ({self.year})"
 
+    def __gt__(self, other):
+        return self.title > other.title
+
     def play(self):
         self.times_played += 1
 
@@ -19,6 +22,9 @@ class Series(Movie):
 
     def __str__(self):
         return f"{self.title} S{self.season}E{self.episode}"
+
+    def __gt__(self, other):
+        return self.title > other.title
 
     def play(self):
         self.times_played += 1
@@ -32,17 +38,33 @@ pulp_fiction = Movie("Pulp Fiction", 1994, "Crime", 0)
 pictures_list.append(pulp_fiction)
 the_matrix = Movie("The Matrix", 1999, "Action", 0)
 pictures_list.append(the_matrix)
-#coo?
-#print(type(Movie) == type)
+rick_and_morty = Series("Rick and Morty", 2013, "Animation", 1, 1, 0)
+pictures_list.append(rick_and_morty)
+rocky = Movie("Rocky", 1976, "Drama", 0)
+pictures_list.append(rocky)
+shawshank_redemption = Movie("Shawshank Redemption", 1994, "Drama", 0)
+pictures_list.append(shawshank_redemption)
+elmo = Series("Elmo", 1979, "Comedy", 1, 1, 0)
+pictures_list.append(elmo)
 
 def get_movies(list):
     for item in list:
-        if item == Movie:
-            print(item)   
-        #movie_list.append(item)
-    #print(movie_list)
-    #movie_by_title = sorted(movie_list, key=lambda x: x.title)
-    #[print(movie) for movie in movie_by_title]
-
+        movie_list = []
+        if isinstance(item, Movie) and not isinstance(item, Series):
+            movie_list.append(item)
+        movie_list_sorted = sorted(movie_list, key=lambda movie: movie.title)
+        for movie in movie_list_sorted:
+            print(movie)
 
 get_movies(pictures_list)
+
+def get_series(list):
+    for item in list:
+        series_list = []
+        if isinstance(item, Series):
+            series_list.append(item)
+        series_list_sorted = sorted(series_list, key=lambda series: series.title)
+        for series in series_list_sorted:
+            print(series)
+get_series(pictures_list)
+
