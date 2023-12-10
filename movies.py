@@ -54,7 +54,7 @@ def get_movies(list):
     for movie in movies_by_title:
             print(movie)
 
-get_movies(pictures_list)
+#get_movies(pictures_list)
 
 
 def get_series(list):
@@ -67,5 +67,18 @@ def get_series(list):
     for series in series_by_title:
             print(series)
 
-get_series(pictures_list)
+#get_series(pictures_list)
 
+
+def search(title, list):
+    for movie in list:
+        if movie.title == title:
+            return movie
+    return False
+
+search_title = input("search:\n")
+search_result = search(search_title, pictures_list)
+if search_result:
+    print(search_result)
+else:
+    print('No such picture')
