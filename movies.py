@@ -1,3 +1,5 @@
+import random
+
 class Movie:
     def __init__(self, title, year, genre, times_played):
         self.title = title
@@ -75,10 +77,32 @@ def search(title, list):
         if movie.title == title:
             return movie
     return False
-
+"""
 search_title = input("search:\n")
 search_result = search(search_title, pictures_list)
 if search_result:
     print(search_result)
 else:
     print('No such picture')
+"""
+
+def generate_views():
+    picture_number = random.randrange(len(pictures_list))
+    picked = pictures_list[picture_number]
+    picked.times_played = random.randrange(1,100)
+    print(f"{picked}, obejrzano {picked.times_played} razy.")
+    
+
+def generate_x10():
+    for i in range(10):
+        generate_views()
+        
+generate_x10()
+
+def top_titles(top):
+    for i in range(top):
+        for title in pictures_list:
+            top_score = 0
+            if title.times_played >= top_score:
+                top_score = title.times_played
+            
