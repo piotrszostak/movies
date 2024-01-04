@@ -44,16 +44,14 @@ elmo = Series("Elmo", 1979, "Comedy", 1, 1, 0)
 pictures_list.append(elmo)
 
 
+
 def get_movies(movie_library):
     movie_list = []
     for item in movie_library:
         if isinstance(item, Movie) and not isinstance(item, Series):
             movie_list.append(item)
-
-    movies_by_title = sorted(movie_list, key=lambda movie: movie.title)
-    for movie in movies_by_title:
-            print(movie)
-
+    sorted_movies = sorted(movie_list, key=lambda movie: movie.title)
+    return sorted_movies
 
 
 def get_series(series_library):
@@ -61,10 +59,8 @@ def get_series(series_library):
     for item in series_library:
         if isinstance(item, Series):
             series_list.append(item)
-
-    series_by_title = sorted(series_list, key=lambda series: series.title)
-    for series in series_by_title:
-            print(series)
+    sorted_series = sorted(series_list, key=lambda series: series.title)
+    return sorted_series
 
 
 
@@ -86,7 +82,6 @@ def generate_views():
 def generate_x10():
     for i in range(10):
         generate_views()
-        
 
 
 
@@ -101,11 +96,18 @@ def top_titles():
 
 def main():
     print("Biblioteka filmów:")
-    get_movies(pictures_list)
+    movie_list = get_movies(pictures_list)
+    for movie in movie_list:
+        print(movie)
+    
     print("Biblioteka seriali:")
-    get_series(pictures_list)
+    series_list = get_series(pictures_list)
+    for series in series_list:
+        print(series)
+    
     print('Obejrzenia:')
     generate_x10()
+    
     search_title = input("Wyszukaj: ")
     search_result = search(search_title, pictures_list)
     if search_result:
