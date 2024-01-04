@@ -23,8 +23,6 @@ class Series(Movie):
     def __str__(self):
         return f"{self.title} S{self.season}E{self.episode}"
 
-    def play(self):
-        self.times_played += 1
 
 
 pictures_list = []
@@ -46,9 +44,9 @@ elmo = Series("Elmo", 1979, "Comedy", 1, 1, 0)
 pictures_list.append(elmo)
 
 
-def get_movies(list):
+def get_movies(movie_library):
     movie_list = []
-    for item in list:
+    for item in movie_library:
         if isinstance(item, Movie) and not isinstance(item, Series):
             movie_list.append(item)
 
@@ -56,12 +54,11 @@ def get_movies(list):
     for movie in movies_by_title:
             print(movie)
 
-#get_movies(pictures_list)
 
 
-def get_series(list):
+def get_series(series_library):
     series_list = []
-    for item in list:
+    for item in series_library:
         if isinstance(item, Series):
             series_list.append(item)
 
@@ -69,7 +66,6 @@ def get_series(list):
     for series in series_by_title:
             print(series)
 
-#get_series(pictures_list)
 
 
 def search(title, list):
@@ -85,12 +81,14 @@ def generate_views():
     picked = pictures_list[picture_number]
     picked.times_played = random.randrange(1,100)
     print(f"{picked}, obejrzano {picked.times_played} razy.")
-    
+
 
 def generate_x10():
     for i in range(10):
         generate_views()
         
+
+
 
 def top_titles():
     for i in range(3):
@@ -100,15 +98,19 @@ def top_titles():
                 top_score = title.times_played
 
 
+
 def main():
     print("Biblioteka filmów:")
-    print(*pictures_list, sep="\n")
+    get_movies(pictures_list)
+    print("Biblioteka seriali:")
+    get_series(pictures_list)
+    print('Obejrzenia:')
     generate_x10()
-    search_title = input("search:\n")
+    search_title = input("Wyszukaj: ")
     search_result = search(search_title, pictures_list)
     if search_result:
         print(search_result)
     else:
-        print('No such picture')
+        print('Nie ma takiego filmu/serialu')
 
 main()
